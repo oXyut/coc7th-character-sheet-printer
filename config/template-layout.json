@@ -1,0 +1,137 @@
+{
+  "version": 1,
+  "sourcePdf": "CoC7JP-Sheet-Modern入力可.pdf",
+  "profile": [
+    { "id": "profile.name", "source": "名前あ", "fontSize": 6, "align": "left" },
+    { "id": "profile.player", "source": "プレイヤー", "fontSize": 6, "align": "left" },
+    { "id": "profile.address", "source": "住所", "fontSize": 6, "align": "left" },
+    { "id": "profile.occupation", "source": "職業", "fontSize": 6, "align": "left" },
+    { "id": "profile.birthplace", "source": "出身", "fontSize": 6, "align": "left" },
+    { "id": "profile.gender", "source": "性別", "fontSize": 6, "align": "center" },
+    { "id": "profile.age", "source": "年齢", "fontSize": 6, "align": "center" }
+  ],
+  "abilities": [
+    { "key": "str", "source": "STR" },
+    { "key": "con", "source": "CON" },
+    { "key": "siz", "source": "SIZ" },
+    { "key": "dex", "source": "DEX" },
+    { "key": "app", "source": "APP" },
+    { "key": "edu", "source": "EDU　知識" },
+    { "key": "pow", "source": "POW" },
+    { "key": "int", "source": "INT　アイデア" }
+  ],
+  "singleFields": [
+    { "id": "vitals.hpMax", "source": "最大耐久力", "fontSize": 6, "align": "center" },
+    { "id": "vitals.majorWound", "source": "重傷", "fontSize": 6, "align": "center" },
+    { "id": "vitals.sanityIndefinite", "source": "不定の狂気", "fontSize": 6, "align": "center" },
+    { "id": "vitals.sanityTemporary", "source": "一時的狂気", "fontSize": 6, "align": "center" },
+    { "id": "vitals.sanityStart", "source": "開始時", "fontSize": 6, "align": "center" },
+    { "id": "vitals.sanityMax", "source": "最大値", "fontSize": 6, "align": "center" },
+    { "id": "vitals.mpMax", "source": "最大MP", "fontSize": 6, "align": "center" },
+    { "id": "movement.regular", "source": "移動率", "fontSize": 8, "align": "center" },
+    { "id": "combat.damageBonus", "source": "戦闘　ダメージ・ボーナス", "fontSize": 8, "align": "center" },
+    { "id": "combat.build", "source": "戦闘　ビルド", "fontSize": 8, "align": "center" }
+  ],
+  "explicitFields": [
+    {
+      "id": "vitals.luck",
+      "page": 0,
+      "rect": [177.08, 490.72, 28.905, 11.212],
+      "fontSize": 6,
+      "align": "center"
+    }
+  ],
+  "combatDodge": { "source": "戦闘　回避" },
+  "fixedSkills": [
+    { "key": "intimidate", "label": "威圧", "source": "威圧", "aliases": ["威圧"] },
+    { "key": "driveAuto", "label": "運転（自動車）", "source": "運転（自動車）", "aliases": ["運転", "運転（自動車）"] },
+    { "key": "occult", "label": "オカルト", "source": "オカルト", "aliases": ["オカルト"] },
+    { "key": "dodge", "label": "回避", "source": "回避", "aliases": ["回避"] },
+    { "key": "locksmith", "label": "鍵開け", "source": "鍵開け", "aliases": ["鍵開け"] },
+    { "key": "medicine", "label": "医学", "source": "医学", "aliases": ["医学"] },
+    { "key": "fastTalk", "label": "言いくるめ", "source": "言いくるめ", "aliases": ["言いくるめ"] },
+    { "key": "firstAid", "label": "応急手当", "source": "応急手当", "aliases": ["応急手当"] },
+    { "key": "stealth", "label": "隠密", "source": "隠密", "aliases": ["隠密"] },
+    { "key": "science", "label": "科学", "source": "科学", "labelSource": "技能１", "aliases": ["科学"] },
+    { "key": "appraise", "label": "鑑定", "source": "鑑定", "aliases": ["鑑定"] },
+    { "key": "mechanicalRepair", "label": "機械修理", "source": "機械修理", "aliases": ["機械修理"] },
+    { "key": "listen", "label": "聞き耳", "source": "聞き耳", "aliases": ["聞き耳"] },
+    { "key": "accounting", "label": "経理", "source": "経理", "aliases": ["経理"] },
+    { "key": "cthulhuMythos", "label": "クトゥルフ神話", "source": "クトゥルフ神話", "aliases": ["クトゥルフ神話"] },
+    { "key": "artCraft", "label": "芸術/製作", "source": "芸術/製作", "labelSource": "技能６", "aliases": ["芸術/製作"] },
+    { "key": "brawl", "label": "近接戦闘（格闘）", "source": "近接戦闘（格闘）", "aliases": ["近接戦闘", "近接戦闘（格闘）"] },
+    { "key": "naturalWorld", "label": "自然", "source": "自然", "aliases": ["自然"] },
+    { "key": "firearmsHandgun", "label": "射撃（拳銃）", "source": "射撃（拳銃）", "aliases": ["射撃（拳銃）"] },
+    { "key": "firearmsRifle", "label": "射撃（ライフル/ショットガン）", "source": "射撃（ライフル/ショットガン）", "aliases": ["射撃（ライフル/ショットガン）"] },
+    { "key": "archaeology", "label": "考古学", "source": "考古学", "aliases": ["考古学"] },
+    { "key": "track", "label": "追跡", "source": "追跡", "aliases": ["追跡"] },
+    { "key": "jump", "label": "跳躍", "source": "跳躍", "aliases": ["跳躍"] },
+    { "key": "electricalRepair", "label": "電気修理", "source": "電気修理", "aliases": ["電気修理"] },
+    { "key": "sleightOfHand", "label": "手さばき", "source": "手さばき", "aliases": ["手さばき"] },
+    { "key": "electronicEngineering", "label": "電子工学", "source": "投擲", "aliases": ["電子工学"] },
+    { "key": "throw", "label": "投擲", "source": "登攀", "aliases": ["投擲"] },
+    { "key": "climb", "label": "登攀", "source": "図書館", "aliases": ["登攀"] },
+    { "key": "libraryUse", "label": "図書館", "source": "ナビゲート", "aliases": ["図書館"] },
+    { "key": "pilot", "label": "操縦", "source": "操縦", "labelSource": "技能11", "aliases": ["操縦"] },
+    { "key": "anthropology", "label": "人類学", "source": "人類学", "aliases": ["人類学"] },
+    { "key": "psychology", "label": "心理学", "source": "心理学", "aliases": ["心理学"] },
+    { "key": "swim", "label": "水泳", "source": "水泳", "aliases": ["水泳"] },
+    { "key": "psychoanalysis", "label": "精神分析", "source": "精神分析", "aliases": ["精神分析"] },
+    { "key": "persuade", "label": "説得", "source": "説得", "aliases": ["説得"] },
+    { "key": "creditRating", "label": "信用", "source": "信用", "aliases": ["信用"] },
+    { "key": "navigate", "label": "ナビゲート", "source": "変装", "aliases": ["ナビゲート"] },
+    { "key": "disguise", "label": "変装", "source": "法律", "aliases": ["変装"] },
+    { "key": "law", "label": "法律", "source": "ほかの言語", "aliases": ["法律"] },
+    { "key": "otherLanguage", "label": "ほかの言語", "source": "技能１３－１", "labelSource": "技能１３", "aliases": ["ほかの言語"] },
+    { "key": "spotHidden", "label": "目星", "source": "目星", "aliases": ["目星"] },
+    { "key": "nativeLanguage", "label": "母国語", "source": "母国語", "labelSource": "技能15", "aliases": ["母国語"] },
+    { "key": "charm", "label": "魅惑", "source": "魅惑", "aliases": ["魅惑"] },
+    { "key": "history", "label": "歴史", "source": "歴史", "aliases": ["歴史"] },
+    { "key": "computerUse", "label": "コンピューター", "source": "コンピューター", "aliases": ["コンピューター"] },
+    { "key": "survival", "label": "サバイバル", "source": "サバイバル", "labelSource": "技能9", "aliases": ["サバイバル"] },
+    { "key": "heavyMachinery", "label": "重機械操作", "source": "重機械操作", "aliases": ["重機械操作"] }
+  ],
+  "customSkillLabels": [
+    "技能2", "技能3", "技能4", "技能５", "技能７", "技能８", "技能10",
+    "技能１４", "技能１６", "技能１７", "技能１８", "技能１９", "技能２０"
+  ],
+  "weapons": {
+    "count": 5,
+    "sources": {
+      "name": "武器{n}",
+      "regular": "レギュラー{n}",
+      "hard": "ハード{n}",
+      "extreme": "イクストリーム{n}",
+      "damage": "ダメージ{n}",
+      "range": "射程{n}",
+      "attacks": "攻撃回数{n}",
+      "ammo": "装弾数{n}",
+      "malfunction": "故障{n}"
+    }
+  },
+  "equipmentSources": [
+    "装備と所持品１", "装備と所持品２", "装備と所持品３", "装備と所持品４", "装備と所持品５",
+    "装備と所持品６", "装備と所持品７", "装備と所持品８", "装備と所持品９", "装備と所持品１０",
+    "装備と所持品１１", "装備と所持品１２", "装備と所持品１３", "装備と所持品１４", "装備と所持品１５",
+    "装備と所持品１６", "装備と所持品１７", "装備と所持品１８", "装備と所持品１９", "装備と所持品２０"
+  ],
+  "finance": [
+    { "id": "finance.spendingLevel", "source": "支出レベル" },
+    { "id": "finance.cash", "source": "現金" },
+    { "id": "finance.assets", "source": "資産２", "multiline": true }
+  ],
+  "backstory": [
+    { "id": "backstory.appearance", "label": "容姿の描写", "source": "容姿の描写２" },
+    { "id": "backstory.ideology", "label": "イデオロギー/信念", "source": "イデオロギー/信念２" },
+    { "id": "backstory.significantPeople", "label": "重要な人々", "source": "重要な人々２" },
+    { "id": "backstory.meaningfulLocations", "label": "意味のある場所", "source": "意味のある場所２" },
+    { "id": "backstory.treasuredPossessions", "label": "秘蔵の品", "source": "秘蔵の品２" },
+    { "id": "backstory.traits", "label": "特徴", "source": "特徴２" },
+    { "id": "backstory.injuries", "label": "負傷、傷跡", "source": "負傷、傷跡２" },
+    { "id": "backstory.phobias", "label": "恐怖症、マニア", "source": "恐怖症、マニア２" },
+    { "id": "backstory.arcane", "label": "魔導書、呪文、アーティファクト", "source": "魔導書、呪文、アーティファクト２" },
+    { "id": "backstory.encounters", "label": "遭遇した超自然の存在", "source": "遭遇した超自然の存在２" }
+  ],
+  "portraitSource": "写真・似顔絵_af_image",
+  "rectOverrides": {}
+}
