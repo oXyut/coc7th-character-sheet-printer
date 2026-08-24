@@ -1,18 +1,37 @@
 # coc7th-character-sheet-printer
 
-いあきゃらの「テキスト出力（7版 v2系）」を読み込み、入力可能な現代探索者シートPDFへ変換するNode.js CLIです。
+いあきゃらの「テキスト出力（7版 v2系）」を読み込み、入力可能な現代探索者シートPDFへ変換するWebアプリ兼Node.js CLIです。
 
 原本PDFのフォーム名・日本語フォント・数値欄座標には不整合があるため、印刷のたびに原本のフォームを除去し、安定した項目IDを持つPDFマスタを再構築します。原本の `CoC7JP-Sheet-Modern入力可.pdf` 自体は変更しません。
 
 ## 必要環境
 
-- Node.js 20以上
+- Node.js 20.19以上、または22.12以上
 - npm
 - `pdftoppm`（配置確認画像を生成する場合のみ）
 
 ```sh
 npm install
 ```
+
+## Web版
+
+ブラウザ版では、いあきゃらTXTと任意のPNG/JPEGを選ぶだけでPDFを生成できます。入力ファイル・立ち絵・完成PDFはサーバーへ送信せず、ブラウザ内だけで処理します。
+
+```sh
+# 開発サーバー
+npm run dev
+
+# GitHub Pages向け静的ファイルを dist/ へ生成
+npm run build:web
+
+# 生成結果をローカルで確認
+npm run preview
+```
+
+GitHub ActionsはPull RequestごとにテストとWebビルドを実行し、`main` へのマージ後にGitHub Pagesへ配置します。リポジトリの Settings → Pages → Build and deployment で、Sourceを「GitHub Actions」に設定してください。
+
+Web版へ同梱される第三者成果物のライセンスは、画面下部の「ライセンス」ページと [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) で確認できます。公開前に、原本PDFを再配布できる条件も別途確認してください。
 
 ## 使い方
 
