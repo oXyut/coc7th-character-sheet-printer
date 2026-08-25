@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#10151d">
+    <title>ライセンス | Character Sheet Printer</title>
+    <link rel="stylesheet" href="./styles.css">
+    <style>
+      .license-page { max-width: 900px; margin: 0 auto; padding: 70px 20px 100px; }
+      .license-page h1 { font-size: clamp(40px, 7vw, 72px); }
+      .license-page h2 { margin-top: 52px; color: #ff7167; }
+      .license-page pre { padding: 24px; overflow: auto; border: 1px solid #36414e; background: #171e28; color: #cbd3dc; white-space: pre-wrap; font: 12px/1.75 ui-monospace, monospace; }
+      .back-link { display: inline-block; margin-bottom: 40px; color: #70d4aa; }
+    </style>
+  </head>
+  <body>
+    <main class="license-page">
+      <a class="back-link" href="./">← 変換画面へ戻る</a>
+      <p class="eyebrow">OPEN SOURCE LICENSES</p>
+      <h1>ライセンス</h1>
+      <p>ブラウザ版で使用しているオープンソースソフトウェアとフォントのライセンスです。</p>
+      <h2>pdf-lib</h2><pre id="pdf-lib-license"></pre>
+      <h2>@pdf-lib/fontkit</h2><pre id="fontkit-license"></pre>
+      <h2>@expo-google-fonts/noto-sans-jp</h2><pre id="expo-license"></pre>
+      <h2>Noto Sans JP Font</h2><pre id="font-license"></pre>
+    </main>
+    <script type="module" src="./licenses.js"></script>
+  </body>
+</html>

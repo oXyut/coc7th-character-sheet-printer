@@ -1,12 +1,12 @@
 # coc7th-character-sheet-printer
 
-いあきゃらの「テキスト出力（7版 v2系）」を読み込み、入力可能な現代探索者シートPDFへ変換するNode.js CLIです。
+いあきゃらの「テキスト出力（7版 v2系）」を読み込み、入力可能な現代探索者シートPDFへ変換するWebアプリ兼Node.js CLIです。
 
 原本PDFのフォーム名・日本語フォント・数値欄座標には不整合があるため、印刷のたびに原本のフォームを除去し、安定した項目IDを持つPDFマスタを再構築します。原本の `CoC7JP-Sheet-Modern入力可.pdf` 自体は変更しません。
 
 ## 必要環境
 
-- Node.js 20以上
+- Node.js 20.19以上、または22.12以上
 - npm
 - `pdftoppm`（配置確認画像を生成する場合のみ）
 
@@ -14,9 +14,37 @@
 npm install
 ```
 
+## Web版
+
+ブラウザ版では、公式の原本PDF、いあきゃらTXT、任意のPNG/JPEGを選んでPDFを生成できます。入力ファイル・立ち絵・完成PDFはサーバーへ送信せず、ブラウザ内だけで処理します。
+
+1. [KADOKAWA公式サイトの原本PDF](https://product.kadokawa.co.jp/cthulhu/contents/media-download/2535/8636ae8ef4bc6244/PDF/)を取得する
+2. [いあきゃら](https://iachara.com/)で対象キャラクターを開く
+3. 「キャラ出力」→「ファイルに出力」→「テキスト出力」の順に操作してTXTを保存する
+4. Web画面で原本PDF、TXT、任意の立ち絵を選択する
+
+```sh
+# 開発サーバー
+npm run dev
+
+# GitHub Pages向け静的ファイルを dist/ へ生成
+npm run build:web
+
+# 生成結果をローカルで確認
+npm run preview
+```
+
+GitHub ActionsはPull RequestごとにテストとWebビルドを実行し、`main` へのマージ後にGitHub Pagesへ配置します。リポジトリの Settings → Pages → Build and deployment で、Sourceを「GitHub Actions」に設定してください。
+
+Web版へ同梱される第三者成果物のライセンスは、画面下部の「ライセンス」ページと [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) で確認できます。
+
+### 原本PDFの取り扱い
+
+[KADOKAWA公式の二次創作ガイドライン](https://product.kadokawa.co.jp/cthulhu/guideline.html)では、公式コンテンツの改変・再配布、およびゲームプレイと無関係な再配布や改変素材の公開が禁止されています。そのため、GitHub Pagesの配布物には原本PDFを同梱せず、利用者が公式サイトから取得したPDFをブラウザ内で読み込む方式にしています。原本PDFや生成物は、セッション利用の範囲で公式ガイドラインに従って使用してください。
+
 ## 使い方
 
-いあきゃらのキャラクター画面から「テキスト出力」を保存し、そのファイルを指定します。
+いあきゃらのキャラクター画面で「キャラ出力」→「ファイルに出力」→「テキスト出力」の順に操作し、保存したTXTを指定します。
 
 ```sh
 npm run print -- "/path/to/character.txt"

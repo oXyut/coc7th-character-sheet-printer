@@ -5,10 +5,13 @@
   "type": "module",
   "description": "いあきゃらの7版テキスト出力を正規化済みキャラクターシートPDFへ変換するCLI",
   "engines": {
-    "node": ">=20"
+    "node": "^20.19.0 || >=22.12.0"
   },
   "scripts": {
     "build:template": "node scripts/build-template.mjs",
+    "build:web": "vite build && node scripts/verify-web-artifact.mjs",
+    "dev": "vite",
+    "preview": "vite preview",
     "verify:template": "node scripts/verify-template.mjs",
     "print": "node scripts/print-character.mjs",
     "test": "node --test"
@@ -17,5 +20,8 @@
     "@expo-google-fonts/noto-sans-jp": "^0.4.3",
     "@pdf-lib/fontkit": "^1.1.1",
     "pdf-lib": "^1.17.1"
+  },
+  "devDependencies": {
+    "vite": "^7.3.6"
   }
 }
