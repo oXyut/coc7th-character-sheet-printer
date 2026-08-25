@@ -3,6 +3,9 @@ import './styles.css';
 
 const elements = {
   form: document.querySelector('#converter-form'),
+  sourcePdfInput: document.querySelector('#source-pdf-input'),
+  sourcePdfDrop: document.querySelector('#source-pdf-drop'),
+  sourcePdfMeta: document.querySelector('#source-pdf-meta'),
   txtInput: document.querySelector('#txt-input'),
   txtDrop: document.querySelector('#txt-drop'),
   txtMeta: document.querySelector('#txt-meta'),
@@ -22,6 +25,7 @@ const elements = {
   download: document.querySelector('#download-link'),
 };
 
+let sourcePdfFile;
 let txtFile;
 let portraitFile;
 let parsedCharacter;
@@ -46,7 +50,7 @@ function showError(message) {
 }
 
 function updateSubmit() {
-  elements.submit.disabled = !parsedCharacter || elements.form.getAttribute('aria-busy') === 'true';
+  elements.submit.disabled = !sourcePdfFile || !parsedCharacter || elements.form.getAttribute('aria-busy') === 'true';
 }
 
 function setBusy(busy) {
@@ -71,6 +75,38 @@ function setTxtMeta(characterName, detail) {
   elements.txtMeta.replaceChildren(name, description);
 }
 
+function updateInputStatus() {
+  if (!sourcePdfFile) {
+    setStatus('公式サイトから取得した原本PDFを選択してください。');
+  } else if (!parsedCharacter) {
+    setStatus('いあきゃらから出力したTXTを選択してください。');
+  } else {
+    setStatus('入力内容を確認しました。PDFを生成できます。');
+  }
+}
+
+async function useSourcePdfFile(file) {
+  clearError();
+  elements.result.hidden = true;
+  sourcePdfFile = undefined;
+  if (!file) {
+    elements.sourcePdfMeta.textContent = 'ファイルが選択されていません';
+    updateInputStatus();
+    updateSubmit();
+    return;
+  }
+  try {
+    const signature = new TextDecoder('ascii').decode(await file.slice(0, 5).arrayBuffer());
+    if (signature !== '%PDF-') throw new Error('原本はPDFファイルを指定してください');
+    sourcePdfFile = file;
+    elements.sourcePdfMeta.textContent = `${file.name} · ${(file.size / 1024 / 1024).toFixed(1)} MB`;
+    updateInputStatus();
+  } catch (error) {
+    showError(error instanceof Error ? error.message : '原本PDFを読み取れませんでした');
+  }
+  updateSubmit();
+}
+
 async function useTxtFile(file) {
   clearError();
   elements.result.hidden = true;
@@ -86,7 +122,7 @@ async function useTxtFile(file) {
     const text = await file.text();
     parsedCharacter = parseIacharaText(text);
     setTxtMeta(parsedCharacter.basic['名前'], `${file.name} · 7版 v${formatVersion(parsedCharacter.version)}`);
-    setStatus('入力内容を確認しました。PDFを生成できます。');
+    updateInputStatus();
   } catch (error) {
     showError(error instanceof Error ? error.message : 'TXTを読み取れませんでした');
   }
@@ -143,21 +179,25 @@ function setupDropZone(zone, input, onFile) {
   input.addEventListener('change', () => onFile(input.files[0]));
 }
 
+setupDropZone(elements.sourcePdfDrop, elements.sourcePdfInput, useSourcePdfFile);
 setupDropZone(elements.txtDrop, elements.txtInput, useTxtFile);
 setupDropZone(elements.portraitDrop, elements.portraitInput, usePortraitFile);
 elements.portraitClear.addEventListener('click', clearPortrait);
 
 elements.form.addEventListener('submit', async (event) => {
   event.preventDefault();
-  if (!txtFile || !parsedCharacter) return;
+  if (!sourcePdfFile || !txtFile || !parsedCharacter) return;
   clearError();
   elements.result.hidden = true;
   setBusy(true);
-  setStatus('PDFマスタと日本語フォントを準備しています。初回は数秒かかります。');
+  setStatus('原本PDFと日本語フォントを準備しています。初回は数秒かかります。');
   try {
-    const text = await txtFile.text();
+    const [text, sourcePdfBuffer] = await Promise.all([txtFile.text(), sourcePdfFile.arrayBuffer()]);
     const portraitBuffer = portraitFile ? await portraitFile.arrayBuffer() : null;
-    worker.postMessage({ type: 'generate', text, portraitBuffer, flatten: elements.flatten.checked }, portraitBuffer ? [portraitBuffer] : []);
+    const transferables = portraitBuffer ? [sourcePdfBuffer, portraitBuffer] : [sourcePdfBuffer];
+    worker.postMessage({
+      type: 'generate', text, sourcePdfBuffer, portraitBuffer, flatten: elements.flatten.checked,
+    }, transferables);
     setStatus('キャラクターシートを生成しています。');
   } catch (error) {
     setBusy(false);

@@ -1,6 +1,5 @@
 import fontUrl from '@expo-google-fonts/noto-sans-jp/400Regular/NotoSansJP_400Regular.ttf?url';
 import layoutConfig from '../config/template-layout.json';
-import sourcePdfUrl from '../CoC7JP-Sheet-Modern入力可.pdf?url';
 
 let assetPromise;
 
@@ -11,11 +10,7 @@ async function fetchBytes(url, label) {
 }
 
 export function loadBrowserPdfAssets() {
-  assetPromise ??= Promise.all([
-    fetchBytes(sourcePdfUrl, 'PDF原本'),
-    fetchBytes(fontUrl, '日本語フォント'),
-  ]).then(([sourcePdfBytes, fontBytes]) => ({
-    sourcePdfBytes,
+  assetPromise ??= fetchBytes(fontUrl, '日本語フォント').then((fontBytes) => ({
     fontBytes,
     layoutConfig,
   }));

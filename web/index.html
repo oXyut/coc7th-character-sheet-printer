@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#10151d">
-    <meta name="description" content="いあきゃらの7版v2系TXTを、ブラウザ内だけでキャラクターシートPDFへ変換します。">
+    <meta name="description" content="公式探索者シートPDFといあきゃらの7版v2系TXTを、ブラウザ内だけでキャラクターシートPDFへ変換します。">
     <meta property="og:title" content="いあきゃら キャラクターシートPDF変換">
-    <meta property="og:description" content="TXTと任意の立ち絵から、編集可能・印刷用のCoC 7版PDFをブラウザ内で生成。">
+    <meta property="og:description" content="公式PDF、いあきゃらTXT、任意の立ち絵から、編集可能・印刷用のCoC 7版PDFをブラウザ内で生成。">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://oxyut.github.io/coc7th-character-sheet-printer/">
     <meta property="og:image" content="https://oxyut.github.io/coc7th-character-sheet-printer/og.png">
@@ -30,22 +30,47 @@
         <div class="hero-copy">
           <p class="eyebrow">CALL OF CTHULHU 7TH EDITION</p>
           <h1 id="page-title">いあきゃらから、<br><span>印刷できる一枚へ。</span></h1>
-          <p class="lead">いあきゃらの「テキスト出力 7版 v2系」と任意の立ち絵を読み込み、編集可能なキャラクターシートPDFを生成します。</p>
+          <p class="lead">公式の探索者シートPDFと、いあきゃらの「ファイルに出力」で保存した7版v2系TXTを読み込み、編集可能なキャラクターシートPDFを生成します。</p>
           <div class="privacy-note">
             <span class="privacy-dot" aria-hidden="true"></span>
-            <p><strong>ファイルは外部へ送信されません。</strong><br>TXT・画像・完成PDFは、この端末のブラウザ内だけで処理されます。</p>
+            <p><strong>ファイルは外部へ送信されません。</strong><br>原本PDF・TXT・画像・完成PDFは、この端末のブラウザ内だけで処理されます。</p>
           </div>
         </div>
         <div class="hero-aside" aria-hidden="true">
-          <div class="stat-card"><span>01</span><strong>TXTを選ぶ</strong></div>
-          <div class="stat-card"><span>02</span><strong>画像を添える</strong></div>
+          <div class="stat-card"><span>01</span><strong>PDFとTXTを選ぶ</strong></div>
+          <div class="stat-card"><span>02</span><strong>立ち絵を添える</strong></div>
           <div class="stat-card"><span>03</span><strong>PDFを保存</strong></div>
         </div>
+      </section>
+
+      <section class="source-guide" aria-labelledby="source-guide-title">
+        <div>
+          <p class="eyebrow">BEFORE YOU START</p>
+          <h2 id="source-guide-title">2つのファイルを準備</h2>
+        </div>
+        <ol>
+          <li><span>01</span><p><a href="https://product.kadokawa.co.jp/cthulhu/contents/media-download/2535/8636ae8ef4bc6244/PDF/">KADOKAWA公式サイト</a>から『新クトゥルフ神話TRPG』探索者シートPDFを取得します。</p></li>
+          <li><span>02</span><p><a href="https://iachara.com/">いあきゃら</a>で対象キャラクターを開き、<strong>「キャラ出力」→「ファイルに出力」→「テキスト出力」</strong>の順に操作してTXTを保存します。</p></li>
+        </ol>
       </section>
 
       <form id="converter-form" class="converter" aria-busy="false">
         <div class="section-heading">
           <p class="step-number">STEP 01</p>
+          <div><h2>公式の原本PDF</h2><p>公式サイトから取得した探索者シートPDFを選択してください。</p></div>
+          <span class="required">必須</span>
+        </div>
+        <label id="source-pdf-drop" class="drop-zone" for="source-pdf-input">
+          <input id="source-pdf-input" type="file" accept=".pdf,application/pdf" required>
+          <span class="drop-icon" aria-hidden="true">PDF</span>
+          <span class="drop-copy"><strong>クリックして原本PDFを選択</strong><small>公式サイトから取得した2ページのPDF</small></span>
+          <span id="source-pdf-meta" class="file-meta">ファイルが選択されていません</span>
+        </label>
+
+        <div class="divider"></div>
+
+        <div class="section-heading">
+          <p class="step-number">STEP 02</p>
           <div><h2>探索者データ</h2><p>いあきゃらから保存したTXTを選択してください。</p></div>
           <span class="required">必須</span>
         </div>
@@ -59,7 +84,7 @@
         <div class="divider"></div>
 
         <div class="section-heading">
-          <p class="step-number">STEP 02</p>
+          <p class="step-number">STEP 03</p>
           <div><h2>立ち絵</h2><p>PNGまたはJPEGを縦横比を保って配置します。</p></div>
           <span class="optional">任意</span>
         </div>
@@ -88,7 +113,7 @@
           </button>
         </div>
 
-        <p id="status" class="status" role="status" aria-live="polite">TXTを選択してください。</p>
+        <p id="status" class="status" role="status" aria-live="polite">公式サイトから取得した原本PDFを選択してください。</p>
         <div id="error" class="error-message" role="alert" tabindex="-1" hidden></div>
 
         <section id="result" class="result-card" tabindex="-1" hidden aria-labelledby="result-title">
@@ -114,8 +139,11 @@
     </main>
 
     <footer>
-      <p>非公式の変換ツールです。いあきゃらおよび各権利者とは関係ありません。</p>
-      <nav aria-label="フッター"><a href="./licenses.html">ライセンス</a><a href="https://github.com/oXyut/coc7th-character-sheet-printer">ソースコード</a></nav>
+      <div class="footer-copy">
+        <p>非公式の変換ツールです。いあきゃらおよび各権利者とは関係ありません。原本PDFと生成物は、セッション利用の範囲で公式ガイドラインに従ってお使いください。</p>
+        <p class="rights-notice">本作は、「株式会社アークライト」及び「株式会社KADOKAWA」が権利を有する『クトゥルフ神話TRPG』シリーズの二次創作物です。<br>Call of Cthulhu is copyright ©1981, 2015, 2019 by Chaosium Inc.; all rights reserved. Arranged by Arclight Inc.<br>Call of Cthulhu is a registered trademark of Chaosium Inc.<br>PUBLISHED BY KADOKAWA CORPORATION 「クトゥルフ神話TRPG」「新クトゥルフ神話TRPG」</p>
+      </div>
+      <nav aria-label="フッター"><a href="https://product.kadokawa.co.jp/cthulhu/contents/media-download/2535/8636ae8ef4bc6244/PDF/">原本PDF</a><a href="https://iachara.com/">いあきゃら</a><a href="https://product.kadokawa.co.jp/cthulhu/guideline.html">公式ガイドライン</a><a href="./licenses.html">ライセンス</a><a href="https://github.com/oXyut/coc7th-character-sheet-printer">ソースコード</a></nav>
     </footer>
     <script type="module" src="./main.js"></script>
   </body>

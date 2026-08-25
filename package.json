@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build:template": "node scripts/build-template.mjs",
-    "build:web": "vite build",
+    "build:web": "vite build && node scripts/verify-web-artifact.mjs",
     "dev": "vite",
     "preview": "vite preview",
     "verify:template": "node scripts/verify-template.mjs",

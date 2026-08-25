@@ -9,6 +9,7 @@ self.onmessage = async ({ data }) => {
     const assets = await loadBrowserPdfAssets();
     const result = await generateCharacterPdfFromAssets(character, {
       ...assets,
+      sourcePdfBytes: new Uint8Array(data.sourcePdfBuffer),
       portraitBytes: data.portraitBuffer ? new Uint8Array(data.portraitBuffer) : null,
       flatten: Boolean(data.flatten),
     });
