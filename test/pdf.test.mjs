@@ -32,7 +32,7 @@ test('正規化マスタの項目IDと矩形が一意である', async () => {
   }
   const luck = template.layout.fields.find((field) => field.id === 'vitals.luck');
   assert.equal(luck.page, 0);
-  assert.deepEqual(luck.rect, { x: 177.08, y: 490.72, width: 28.905, height: 11.212 });
+  assert.deepEqual(luck.rect, { x: 188.5, y: 490.72, width: 15, height: 11.212 });
   assert.equal(luck.align, 'center');
   assert.equal(luck.fontSize, 6);
 });
@@ -72,6 +72,7 @@ test('文字フォームの外観は必要な項目以外で原本を白く塗�
 
   const placeholderField = form.getTextField('vitals.hpMax');
   for (const widget of placeholderField.acroField.getWidgets()) {
+    assert.equal(widget.getAppearanceCharacteristics()?.getBackgroundColor(), undefined);
     const appearance = pdfDoc.context.lookup(widget.getNormalAppearance());
     assert.ok(appearance instanceof PDFRawStream);
     const operators = new TextDecoder().decode(decodePDFRawStream(appearance).decode());

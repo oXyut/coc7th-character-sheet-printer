@@ -21,13 +21,13 @@
     { "key": "int", "source": "INT　アイデア" }
   ],
   "singleFields": [
-    { "id": "vitals.hpMax", "source": "最大耐久力", "fontSize": 6, "align": "center", "background": "white" },
+    { "id": "vitals.hpMax", "source": "最大耐久力", "fontSize": 6, "align": "center", "background": "capsule" },
     { "id": "vitals.majorWound", "source": "重傷", "fontSize": 6, "align": "center" },
     { "id": "vitals.sanityIndefinite", "source": "不定の狂気", "fontSize": 6, "align": "center" },
     { "id": "vitals.sanityTemporary", "source": "一時的狂気", "fontSize": 6, "align": "center" },
-    { "id": "vitals.sanityStart", "source": "開始時", "fontSize": 6, "align": "center", "background": "white" },
-    { "id": "vitals.sanityMax", "source": "最大値", "fontSize": 6, "align": "center", "background": "white" },
-    { "id": "vitals.mpMax", "source": "最大MP", "fontSize": 6, "align": "center", "background": "white" },
+    { "id": "vitals.sanityStart", "source": "開始時", "fontSize": 6, "align": "center", "background": "leftCapsule" },
+    { "id": "vitals.sanityMax", "source": "最大値", "fontSize": 6, "align": "center", "background": "rightCapsule" },
+    { "id": "vitals.mpMax", "source": "最大MP", "fontSize": 6, "align": "center", "background": "capsule" },
     { "id": "movement.regular", "source": "移動率", "fontSize": 8, "align": "center" },
     { "id": "combat.damageBonus", "source": "戦闘　ダメージ・ボーナス", "fontSize": 8, "align": "center" },
     { "id": "combat.build", "source": "戦闘　ビルド", "fontSize": 8, "align": "center" }
@@ -133,5 +133,11 @@
     { "id": "backstory.encounters", "label": "遭遇した超自然の存在", "source": "遭遇した超自然の存在２" }
   ],
   "portraitSource": "写真・似顔絵_af_image",
-  "rectOverrides": {}
+  "rectOverrides": {
+    "vitals.hpMax": [96.5, 569.789, 35, 11.211],
+    "vitals.sanityStart": [246, 569.789, 33.7, 11.211],
+    "vitals.sanityMax": [280.3, 569.789, 33.8, 11.211],
+    "vitals.mpMax": [384, 511.628, 35.3, 11.212],
+    "vitals.luck": [188.5, 490.72, 15, 11.212]
+  }
 }
