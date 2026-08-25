@@ -11,6 +11,7 @@ import { normalizeSkillName } from './iachara-parser.mjs';
 import {
   blankEmptyTextAppearances,
   createNormalizedTemplateFromAssets,
+  updateShapedBackgroundAppearances,
 } from './template-core.mjs';
 
 const FIXED_DATE = new Date('2000-01-01T00:00:00.000Z');
@@ -327,6 +328,7 @@ export async function generateCharacterPdfFromAssets(character, options) {
 
   await embedPortrait(pdfDoc, form, portraitBytes);
   form.updateFieldAppearances(formFont);
+  updateShapedBackgroundAppearances(form, formFont, template.layout.fields);
   blankEmptyTextAppearances(form, formFont);
 
   const appendixSections = [

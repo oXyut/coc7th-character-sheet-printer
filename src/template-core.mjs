@@ -1,5 +1,9 @@
 import fontkit from '@pdf-lib/fontkit';
 import {
+  defaultTextFieldAppearanceProvider,
+  degrees,
+  drawEllipse,
+  drawRectangle,
   PDFButton,
   PDFDocument,
   PDFTextField,
@@ -90,6 +94,7 @@ function descriptor(config, id, legacy, style = {}) {
     fontSize: style.fontSize ?? 6,
     align: style.align ?? 'left',
     multiline: Boolean(style.multiline),
+    background: style.background ?? 'transparent',
   };
 }
 
@@ -111,6 +116,7 @@ function explicitDescriptor(config, item) {
     fontSize: item.fontSize ?? 6,
     align: item.align ?? 'left',
     multiline: Boolean(item.multiline),
+    background: item.background ?? 'transparent',
   };
 }
 
@@ -220,8 +226,60 @@ function addTextField(form, pages, font, item) {
   if (item.multiline) field.enableMultiline();
   field.setAlignment(item.align === 'center' ? TextAlignment.Center : TextAlignment.Left);
   field.addToPage(pages[item.page], {
-    ...item.rect, font, fontSize: item.fontSize, borderWidth: 0, textColor: rgb(0, 0, 0),
+    ...item.rect,
+    font,
+    fontSize: item.fontSize,
+    borderWidth: 0,
+    borderColor: undefined,
+    backgroundColor: undefined,
+    textColor: rgb(0, 0, 0),
   });
+}
+
+function capsuleBackground(widget, shape) {
+  const { width, height } = widget.getRectangle();
+  const inset = 1.2;
+  const left = inset;
+  const right = width - inset;
+  const bottom = inset;
+  const top = height - inset;
+  const radius = Math.max(0, (top - bottom) / 2);
+  const centerY = bottom + radius;
+  const white = rgb(1, 1, 1);
+  const common = { color: white, borderColor: undefined, borderWidth: 0 };
+  const operators = [];
+
+  if (shape === 'capsule' || shape === 'leftCapsule') {
+    operators.push(...drawEllipse({ x: left + radius, y: centerY, xScale: radius, yScale: radius, ...common }));
+  }
+  if (shape === 'capsule' || shape === 'rightCapsule') {
+    operators.push(...drawEllipse({ x: right - radius, y: centerY, xScale: radius, yScale: radius, ...common }));
+  }
+
+  const rectangleLeft = shape === 'rightCapsule' ? left : left + radius;
+  const rectangleRight = shape === 'leftCapsule' ? right : right - radius;
+  operators.push(...drawRectangle({
+    x: rectangleLeft,
+    y: bottom,
+    width: Math.max(0, rectangleRight - rectangleLeft),
+    height: Math.max(0, top - bottom),
+    rotate: degrees(0),
+    xSkew: degrees(0),
+    ySkew: degrees(0),
+    ...common,
+  }));
+  return operators;
+}
+
+export function updateShapedBackgroundAppearances(form, font, items) {
+  for (const item of items) {
+    if (item.type !== 'text' || item.background === 'transparent') continue;
+    const field = form.getTextField(item.id);
+    field.updateAppearances(font, (textField, widget, appearanceFont) => [
+      ...capsuleBackground(widget, item.background),
+      ...defaultTextFieldAppearanceProvider(textField, widget, appearanceFont),
+    ]);
+  }
 }
 
 function addButtonField(form, pages, font, item) {
@@ -262,6 +320,7 @@ export async function createNormalizedTemplateFromAssets({ sourcePdfBytes, fontB
     else addTextField(form, pages, font, item);
   }
   form.updateFieldAppearances(font);
+  updateShapedBackgroundAppearances(form, font, resolvedFields);
   blankEmptyTextAppearances(form, font);
 
   pdfDoc.setTitle('CoC 7th Edition Japanese Character Sheet - normalized template');
