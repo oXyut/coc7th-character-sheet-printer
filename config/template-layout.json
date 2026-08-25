@@ -21,13 +21,13 @@
     { "key": "int", "source": "INT　アイデア" }
   ],
   "singleFields": [
-    { "id": "vitals.hpMax", "source": "最大耐久力", "fontSize": 6, "align": "center" },
+    { "id": "vitals.hpMax", "source": "最大耐久力", "fontSize": 6, "align": "center", "background": "white" },
     { "id": "vitals.majorWound", "source": "重傷", "fontSize": 6, "align": "center" },
     { "id": "vitals.sanityIndefinite", "source": "不定の狂気", "fontSize": 6, "align": "center" },
     { "id": "vitals.sanityTemporary", "source": "一時的狂気", "fontSize": 6, "align": "center" },
-    { "id": "vitals.sanityStart", "source": "開始時", "fontSize": 6, "align": "center" },
-    { "id": "vitals.sanityMax", "source": "最大値", "fontSize": 6, "align": "center" },
-    { "id": "vitals.mpMax", "source": "最大MP", "fontSize": 6, "align": "center" },
+    { "id": "vitals.sanityStart", "source": "開始時", "fontSize": 6, "align": "center", "background": "white" },
+    { "id": "vitals.sanityMax", "source": "最大値", "fontSize": 6, "align": "center", "background": "white" },
+    { "id": "vitals.mpMax", "source": "最大MP", "fontSize": 6, "align": "center", "background": "white" },
     { "id": "movement.regular", "source": "移動率", "fontSize": 8, "align": "center" },
     { "id": "combat.damageBonus", "source": "戦闘　ダメージ・ボーナス", "fontSize": 8, "align": "center" },
     { "id": "combat.build", "source": "戦闘　ビルド", "fontSize": 8, "align": "center" }

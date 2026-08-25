@@ -90,6 +90,7 @@ function descriptor(config, id, legacy, style = {}) {
     fontSize: style.fontSize ?? 6,
     align: style.align ?? 'left',
     multiline: Boolean(style.multiline),
+    background: style.background ?? 'transparent',
   };
 }
 
@@ -111,6 +112,7 @@ function explicitDescriptor(config, item) {
     fontSize: item.fontSize ?? 6,
     align: item.align ?? 'left',
     multiline: Boolean(item.multiline),
+    background: item.background ?? 'transparent',
   };
 }
 
@@ -220,7 +222,13 @@ function addTextField(form, pages, font, item) {
   if (item.multiline) field.enableMultiline();
   field.setAlignment(item.align === 'center' ? TextAlignment.Center : TextAlignment.Left);
   field.addToPage(pages[item.page], {
-    ...item.rect, font, fontSize: item.fontSize, borderWidth: 0, textColor: rgb(0, 0, 0),
+    ...item.rect,
+    font,
+    fontSize: item.fontSize,
+    borderWidth: 0,
+    borderColor: undefined,
+    backgroundColor: item.background === 'white' ? rgb(1, 1, 1) : undefined,
+    textColor: rgb(0, 0, 0),
   });
 }
 

@@ -55,6 +55,30 @@ test('編集可能PDFへ値と外観ストリームを書き込む', async () =>
   }
 });
 
+test('文字フォームの外観は必要な項目以外で原本を白く塗りつぶさない', async () => {
+  const character = parseIacharaText(await readFile(fixtureUrl, 'utf8'));
+  const result = await generateCharacterPdf(character);
+  const pdfDoc = await PDFDocument.load(result.bytes);
+  const form = pdfDoc.getForm();
+  for (const id of ['vitals.luck', 'abilities.str.extreme', 'skills.fixed.electronicEngineering.regular']) {
+    const field = form.getTextField(id);
+    for (const widget of field.acroField.getWidgets()) {
+      const appearance = pdfDoc.context.lookup(widget.getNormalAppearance());
+      assert.ok(appearance instanceof PDFRawStream);
+      const operators = new TextDecoder().decode(decodePDFRawStream(appearance).decode());
+      assert.doesNotMatch(operators, /(?:^|\n)1 1 1 rg(?:\n|$)/);
+    }
+  }
+
+  const placeholderField = form.getTextField('vitals.hpMax');
+  for (const widget of placeholderField.acroField.getWidgets()) {
+    const appearance = pdfDoc.context.lookup(widget.getNormalAppearance());
+    assert.ok(appearance instanceof PDFRawStream);
+    const operators = new TextDecoder().decode(decodePDFRawStream(appearance).decode());
+    assert.match(operators, /(?:^|\n)1 1 1 rg(?:\n|$)/);
+  }
+});
+
 test('空のフォーム欄は描画内容のない外観を持つ', async () => {
   const character = parseIacharaText(await readFile(fixtureUrl, 'utf8'));
   const result = await generateCharacterPdf(character);
